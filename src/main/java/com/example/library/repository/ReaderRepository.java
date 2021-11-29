@@ -1,0 +1,8 @@
+package com.example.library.repository;
+
+import com.example.library.domain.Reader;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ReaderRepository extends CrudRepository<Reader, Integer> {
+
+}
