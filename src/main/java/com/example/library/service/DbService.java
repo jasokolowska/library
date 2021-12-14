@@ -19,7 +19,7 @@ public class DbService {
     private final BorrowingRepository borrowingRepository;
     private final TitleRepository titleRepository;
 
-    public List<Book> getBooks() {
+    public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 

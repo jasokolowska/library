@@ -52,7 +52,8 @@ public class Title {
 
     @OneToMany(
             targetEntity = Book.class,
-            mappedBy = "title"
+            mappedBy = "title",
+            cascade = CascadeType.ALL
     )
     public List<Book> getBooks() {
         return books;

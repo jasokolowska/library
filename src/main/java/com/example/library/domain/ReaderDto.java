@@ -22,4 +22,6 @@ public class ReaderDto {
     private String lastName;
     @JsonProperty("creationDate")
     private Date creation;
+    @JsonProperty("borrowings")
+    private Set<Borrowing> borrowings;
 }

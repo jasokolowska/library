@@ -1,12 +1,16 @@
 package com.example.library.domain;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "readers")
 public class Reader {
@@ -14,17 +18,7 @@ public class Reader {
     private String firstName;
     private String lastName;
     private Date creation;
-
     private Set<Borrowing> borrowings = new HashSet<>();
-
-    public Reader() {
-    }
-
-    public Reader(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.creation = new Date();
-    }
 
     @Id
     @GeneratedValue
