@@ -9,8 +9,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "readers")
 public class Reader {
@@ -19,6 +17,16 @@ public class Reader {
     private String lastName;
     private Date creation;
     private Set<Borrowing> borrowings = new HashSet<>();
+
+    public Reader() {
+    }
+
+    public Reader(int id, String firstName, String lastName, Date creation) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.creation = creation;
+    }
 
     @Id
     @GeneratedValue

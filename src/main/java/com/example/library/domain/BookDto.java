@@ -16,6 +16,6 @@ public class BookDto {
     private int id;
     @JsonProperty("status")
     private Status status;
-    @JsonProperty("title")
-    private Title title;
+    @JsonProperty("titleId")
+    private int titleId;
 }

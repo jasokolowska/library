@@ -21,15 +21,15 @@ public class TitleRepositoryTestSuite {
     @Test
     void testReaderRepositorySave() {
         //Given
-        Title billySummers = new Title("Billy Summers", "Stephen King", 2000);
+        Title billySummers = new Title(1,"Billy Summers", "Stephen King", 2000);
 
         //When
         titleRepository.save(billySummers);
 
         //Then
         int id = billySummers.getId();
-        Optional<Title> titleById = titleRepository.findById(id);
-        assertTrue(titleById.isPresent());
+        Title titleById = titleRepository.findById(id);
+        assertEquals("Billy Summers", titleById.getTitle());
 
         //CleanUp
         titleRepository.deleteById(id);
@@ -38,7 +38,7 @@ public class TitleRepositoryTestSuite {
     @Test
     void testTitleSaveWithBookCopies() {
         //Given
-        Title billySummers = new Title("Billy Summers", "Stephen King", 2000);
+        Title billySummers = new Title(1,"Billy Summers", "Stephen King", 2000);
         Book book1 = new Book();
         Book book2 = new Book();
         Book book3 = new Book();

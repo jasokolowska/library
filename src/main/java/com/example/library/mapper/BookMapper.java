@@ -2,6 +2,9 @@ package com.example.library.mapper;
 
 import com.example.library.domain.Book;
 import com.example.library.domain.BookDto;
+import com.example.library.domain.Title;
+import com.example.library.repository.TitleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +13,14 @@ import java.util.stream.Collectors;
 @Service
 public class BookMapper {
 
+    @Autowired
+    private TitleRepository titleRepository;
+
     public Book mapToBook(final BookDto bookDto) {
         return new Book(
                 bookDto.getId(),
                 bookDto.getStatus(),
-                bookDto.getTitle()
+                titleRepository.findById(bookDto.getTitleId())
         );
     }
 
@@ -22,7 +28,7 @@ public class BookMapper {
         return new BookDto(
                 book.getId(),
                 book.getStatus(),
-                book.getTitle()
+                book.getTitle().getId()
         );
     }
 

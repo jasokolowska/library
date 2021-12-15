@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface ReaderRepository extends CrudRepository<Reader, Integer> {
     List<Reader> findByLastName(String lastName);
+    List<Reader> findAll();
+    Reader findById(int id);
 }

@@ -18,7 +18,10 @@ public class Borrowing {
     public Borrowing() {
     }
 
-    public Borrowing(Date borrowDate) {
+    public Borrowing(int id, Book book, Reader reader, Date borrowDate) {
+        this.id = id;
+        this.book = book;
+        this.reader = reader;
         this.borrowDate = borrowDate;
     }
 

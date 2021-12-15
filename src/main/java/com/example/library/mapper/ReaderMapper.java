@@ -1,7 +1,5 @@
 package com.example.library.mapper;
 
-import com.example.library.domain.Book;
-import com.example.library.domain.BookDto;
 import com.example.library.domain.Reader;
 import com.example.library.domain.ReaderDto;
 import org.springframework.stereotype.Service;
@@ -17,8 +15,7 @@ public class ReaderMapper {
                 readerDto.getId(),
                 readerDto.getFirstName(),
                 readerDto.getLastName(),
-                readerDto.getCreation(),
-                readerDto.getBorrowings()
+                readerDto.getCreation()
         );
     }
 
@@ -27,12 +24,11 @@ public class ReaderMapper {
                 reader.getId(),
                 reader.getFirstName(),
                 reader.getLastName(),
-                reader.getCreation(),
-                reader.getBorrowings()
+                reader.getCreation()
         );
     }
 
-    public List<ReaderDto> mapToBookDtoList (final List<Reader> reader) {
+    public List<ReaderDto> mapToReaderDtoList (final List<Reader> reader) {
         return reader.stream()
                 .map(this::mapToReaderDto)
                 .collect(Collectors.toList());

@@ -14,10 +14,10 @@ public class BorrowingDto {
 
     @JsonProperty("id")
     private int id;
-    @JsonProperty("book")
-    private Book book;
-    @JsonProperty("reader")
-    private Reader reader;
+    @JsonProperty("bookId")
+    private int bookId;
+    @JsonProperty("readerId")
+    private int readerId;
 
     @JsonProperty("borrowDate")
     private Date borrowDate;

@@ -2,13 +2,13 @@ package com.example.library.controller;
 
 import com.example.library.domain.*;
 import com.example.library.mapper.BookMapper;
+import com.example.library.mapper.BorrowingMapper;
+import com.example.library.mapper.ReaderMapper;
+import com.example.library.mapper.TitleMapper;
 import com.example.library.service.DbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,41 +22,74 @@ public class LibraryController {
 
     private final DbService service;
     private final BookMapper bookMapper;
+    private final ReaderMapper readerMapper;
+    private final BorrowingMapper borrowingMapper;
+    private final TitleMapper titleMapper;
 
-    @RequestMapping(value="getBooks", method = RequestMethod.GET)
+    @GetMapping(value="getBooks")
     public List<BookDto> getBooks() {
         List<Book> books = service.getAllBooks();
         return bookMapper.mapToBookDtoList(books);
     }
 
-    @RequestMapping(value="getBook", method = RequestMethod.GET)
-    public BookDto getBook(int bookId) {
-        return new BookDto(1, Status.AVAILABLE, new Title());
+    @GetMapping(value="getBook")
+    public BookDto getBook(@RequestParam int bookId){
+        return bookMapper.mapToBookDto(
+                service.getBook(bookId)
+        );
     }
 
     @PostMapping(value = "addBook", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public BookDto addBook(BookDto bookDto) {
-        return new BookDto(1, Status.AVAILABLE, new Title());
+    public void addBook(@RequestBody BookDto bookDto) {
+        Book book = bookMapper.mapToBook(bookDto);
+        service.saveBook(book);
     }
 
-    @RequestMapping(value="updateBookStatus", method = RequestMethod.PUT)
-    public BookDto updateBookStatus(BookDto bookDto) {
-        return new BookDto(1, Status.AVAILABLE, new Title());
+    @PutMapping(value="updateBookStatus")
+    public BookDto updateBookStatus(@RequestBody BookDto bookDto) {
+        Book book = bookMapper.mapToBook(bookDto);
+        Book savedBook = service.saveBook(book);
+        return bookMapper.mapToBookDto(savedBook);
     }
 
-    @RequestMapping(value="getReaders", method = RequestMethod.GET)
-    public List<Reader> getReaders() {
-        return new ArrayList<>();
+
+    @GetMapping(value="getReaders")
+    public List<ReaderDto> getReaders() {
+        List<Reader> readers = service.getAllReaders();
+        return readerMapper.mapToReaderDtoList(readers);
     }
 
-    @RequestMapping(value="getReader", method = RequestMethod.GET)
-    public ReaderDto getReader(int readerId) {
-        return new ReaderDto(1, "joanna", "sokolowska", new Date(), new HashSet<>());
+    @GetMapping(value="getReader")
+    public ReaderDto getReader(@RequestParam int readerId){
+        return readerMapper.mapToReaderDto(
+                service.getReader(readerId)
+        );
     }
 
     @PostMapping(value = "addReader", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ReaderDto addReader(ReaderDto readerDto) {
-        return new ReaderDto(1, "joanna", "sokolowska", new Date(), new HashSet<>());
+    public void addReader(@RequestBody ReaderDto readerDto) {
+        Reader reader = readerMapper.mapToReader(readerDto);
+        service.saveReader(reader);
     }
+
+    @PostMapping(value = "addBorrowing", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addBorrowing(@RequestBody BorrowingDto borrowingDto) {
+        Borrowing borrowing = borrowingMapper.mapToBorrowing(borrowingDto);
+        service.saveBorrowing(borrowing);
+    }
+
+    @PutMapping(value="updateReturnDate")
+    public BorrowingDto updateBookStatus(@RequestBody BorrowingDto borrowingDto) {
+        Borrowing borrowing = borrowingMapper.mapToBorrowing(borrowingDto);
+        Borrowing updatedReturn = service.saveBorrowing(borrowing);
+        return borrowingMapper.mapToBorrowingDto(updatedReturn);
+    }
+
+    @PostMapping(value = "addTitle", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addTitle(@RequestBody TitleDto titleDto) {
+        Title title = titleMapper.mapToTitle(titleDto);
+        service.saveTitle(title);
+    }
+
 
 }

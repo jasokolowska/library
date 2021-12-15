@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ public class ReaderRepositoryTestSuite {
     @Test
     void testReaderRepositorySave() {
         //Given
-        Reader reader = new Reader("Joanna", "Sokołowska");
+        Reader reader = new Reader(1,"Joanna", "Sokołowska", new Date());
 
         //When
         readerRepository.save(reader);

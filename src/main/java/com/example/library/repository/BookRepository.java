@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface BookRepository extends CrudRepository<Book, Integer> {
     List<Book> findAll();
+    Book findById(int id);
 }

@@ -18,7 +18,8 @@ public class Title {
     public Title() {
     }
 
-    public Title(String title, String author, int publicationYear) {
+    public Title(int id, String title, String author, int publicationYear) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;

@@ -33,8 +33,8 @@ class BorrowingRepositoryTest {
         titleRepository.save(title1);
         titleRepository.save(title2);
 
-        Reader reader1 = new Reader("Joanna", "Sokołowska");
-        Reader reader2 = new Reader("Batrosz", "Drabicki");
+        Reader reader1 = new Reader(1,"Joanna", "Sokołowska", new Date());
+        Reader reader2 = new Reader(2,"Batrosz", "Drabicki", new Date());
 
         Borrowing borrowing1 = new Borrowing(new Date());
         borrowing1.setBook(king1);

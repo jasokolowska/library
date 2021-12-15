@@ -5,21 +5,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 @Getter
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ReaderDto {
+public class TitleDto {
 
     @JsonProperty("id")
     private int id;
-    @JsonProperty("firstName")
-    private String firstName;
-    @JsonProperty("lastName")
-    private String lastName;
-    @JsonProperty("creationDate")
-    private Date creation;
+    @JsonProperty("title")
+    private String title;
+    @JsonProperty("author")
+    private String author;
+    @JsonProperty("publicationYear")
+    private int publicationYear;
 }
