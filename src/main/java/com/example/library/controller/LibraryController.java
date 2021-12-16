@@ -26,6 +26,17 @@ public class LibraryController {
     private final BorrowingMapper borrowingMapper;
     private final TitleMapper titleMapper;
 
+    @PostMapping(value = "rentBook")
+    public BorrowingDto rentBook(@RequestParam int readerId, @RequestParam int bookId) {
+        Borrowing borrowing = service.rentBook(bookId, readerId);
+        return borrowingMapper.mapToBorrowingDto(borrowing);
+    }
+
+    @PutMapping(value = "returnBook")
+    public BorrowingDto returnBook(int bookId){
+        return borrowingMapper.mapToBorrowingDto(service.returnBook(bookId));
+    }
+
     @GetMapping(value="getBooks")
     public List<BookDto> getBooks() {
         List<Book> books = service.getAllBooks();

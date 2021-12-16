@@ -9,4 +9,5 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface BorrowingRepository extends CrudRepository<Borrowing, Integer> {
+    Borrowing findByBook_Id(int bookId);
 }
